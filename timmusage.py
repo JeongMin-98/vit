@@ -7,7 +7,8 @@ import torchvision.transforms as transforms
 import urllib.request
 import json
 
-model = timm.create_model('vit_base_patch16_224', pretrained=True)
+
+model = timm.create_model('vit_base_patch16_224', pretrained=True, features_only=True, out_indices=[2, 3, 4])
 
 model.cuda()
 
@@ -27,7 +28,7 @@ print(pred.shape)
 
 # x = x.to('cpu')
 
-image_path = 'cello.jpg'
+image_path = 'image/cello.jpg'
 img = Image.open(image_path)
 
 preprocessed_img = transforms(img).to(dtype=torch.float32)
